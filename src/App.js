@@ -1,9 +1,10 @@
 import React from 'react';
+import Overview from './components/Overview';
 
 class App extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { inp: '' };
+    this.state = { inp: '', items: [] };
 
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -14,8 +15,9 @@ class App extends React.Component {
   }
 
   handleSubmit(e) {
-    console.log(this.state.inp);
     e.preventDefault();
+    this.setState({ items: this.state.items.concat(this.state.inp) });
+    this.setState({ inp: '' });
   }
 
   render() {
@@ -29,6 +31,7 @@ class App extends React.Component {
           />
           <input type="submit" value="Submit" />
         </form>
+        <Overview items={this.state.items} />
       </div>
     );
   }
